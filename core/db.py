@@ -32,30 +32,26 @@ class Database(object):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS "hostsalive" ( `id` TEXT, `remote_ip` TEXT, `ping` TEXT, `date` TEXT )""")
         self.conn.commit()
         return True
-
     def sql_execute(self, sentence):
     	if type(sentence) is str:
         	self.cursor.execute(sentence)
     	else:
         	self.cursor.execute(sentence[0], sentence[1])
         return self.cursor.fetchall()
-
-    def sql_one_row(self, sentence, column):
+   def sql_one_row(self, sentence, column):
         if type(sentence) is str:
         	self.cursor.execute(sentence)
     	else:
         	self.cursor.execute(sentence[0], sentence[1])	
         return self.cursor.fetchone()[column]
-
-    def sql_insert(self, sentence):
+  def sql_insert(self, sentence):
         if type(sentence) is str:
         	self.cursor.execute(sentence)
     	else:
         	self.cursor.execute(sentence[0], sentence[1])
         self.conn.commit()
         return True
-
-    def prop_sentences_stats(self, type, vId = None):
+ def prop_sentences_stats(self, type, vId = None):
         return {
         	'get_data' : "SELECT victims.*, geo.id, geo.city, geo.country_code, geo.country_name, geo.ip, geo.latitude, geo.longitude, geo.metro_code, geo.region_code, geo.region_name, geo.time_zone, geo.zip_code, geo.isp, geo.ua, victims.ip AS ip_local, COUNT(clicks.id), geo.connection, clicks.site, geo.refer, victims_data.last_online, victims_data.name, victims_battery.charging, victims_battery.time_c, victims_battery.time_d, victims_battery.level FROM victims INNER JOIN geo ON victims.id = geo.id LEFT JOIN clicks ON clicks.id = victims.id LEFT JOIN victims_battery ON victims_battery.id = victims.id LEFT JOIN victims_data ON victims_data.id = victims.id GROUP BY victims.id ORDER BY victims.time DESC",
         	'all_networks' : "SELECT networks.* FROM networks ORDER BY id",
