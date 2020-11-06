@@ -21,7 +21,6 @@
 ###############################################
                                               #
 from core.utils import utils                  #
-from core.trape import Trape                  #
 from core.db import Database                  #
 from time import sleep                        #                  
 try:                                          #
