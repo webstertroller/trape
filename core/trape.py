@@ -21,7 +21,6 @@ import sys
 import os
 from core.utils import utils
 import subprocess
-import requests
 import hashlib, binascii
 from threading import Timer
 from multiprocessing import Process
