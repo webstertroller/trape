@@ -92,7 +92,7 @@ f = urllib2.urlopen('http://www.python.org/')
 import base64
 import hashlib
 import http.client
-import mimetools
+import email
 import os
 import posixpath
 import random
